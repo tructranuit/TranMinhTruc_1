@@ -55,16 +55,30 @@
             android:textAppearance="?android:textAppearanceSmall" />
 
         <TextView
+            style="@style/TextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Khóa:"
-            style="@style/TextViewStyle"/>
+            android:text="Khóa:" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/year"
             android:padding="10dp"
-            android:textAppearance="?android:textAppearanceSmall"/>
+            android:text="@string/year"
+            android:textAppearance="?android:textAppearanceSmall" />
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Môn học:" />
+
+        <ListView
+            android:id="@+id/lv_courses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
 
     </LinearLayout>
 
