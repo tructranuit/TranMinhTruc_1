@@ -94,22 +94,22 @@ public class QuestionFragment extends Fragment {
         return view;
     }
 
-    public void checkAnswer() {
-        int radioID = radioGroup.getCheckedRadioButtonId();
-        if (radioID == -1) {
-            Toast.makeText(getContext(), "Chưa chọn câu trả lời", Toast.LENGTH_SHORT).show();
-        }
-        switch (radioID) {
-            case R.id.rad_opt1:
-                break;
-            case R.id.rad_opt2:
-                break;
-            case R.id.rad_opt3:
-                break;
-            case R.id.rad_opt4:
-                break;
-        }
-    }
+//    public void checkAnswer() {
+//        int radioID = radioGroup.getCheckedRadioButtonId();
+//        if (radioID == -1) {
+//            Toast.makeText(getContext(), "Chưa chọn câu trả lời", Toast.LENGTH_SHORT).show();
+//        }
+//        switch (radioID) {
+//            case R.id.rad_opt1:
+//                break;
+//            case R.id.rad_opt2:
+//                break;
+//            case R.id.rad_opt3:
+//                break;
+//            case R.id.rad_opt4:
+//                break;
+//        }
+//    }
 
     class ReadJSON extends AsyncTask<String, Void, String> {
 
