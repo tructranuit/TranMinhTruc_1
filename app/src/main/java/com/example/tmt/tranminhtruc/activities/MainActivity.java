@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new PersonalInformationFragment(), "Thông tin");
+        adapter.addFragment(new PersonalInformationFragment(), "Thông tin cá nhân");
         adapter.addFragment(new EducationFragment(), "Học tập");
         adapter.addFragment(new InterestsFragment(), "Sở thích");
         adapter.addFragment(new QuestionFragment(), "Câu hỏi");

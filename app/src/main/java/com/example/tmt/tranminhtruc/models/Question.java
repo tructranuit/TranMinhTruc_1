@@ -20,6 +20,7 @@ public class Question {
         this.opt4 = opt4;
     }
 
+
     public String getQuestion() {
         return question;
     }
