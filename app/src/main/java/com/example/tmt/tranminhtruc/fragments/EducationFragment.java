@@ -1,6 +1,7 @@
 package com.example.tmt.tranminhtruc.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.ListView;
 
 import com.example.tmt.tranminhtruc.R;
 import com.example.tmt.tranminhtruc.activities.MainActivity;
+import com.example.tmt.tranminhtruc.adapters.CoursesAdapter;
+import com.example.tmt.tranminhtruc.models.Course;
 
 import java.util.ArrayList;
 
@@ -22,7 +25,7 @@ public class EducationFragment extends Fragment {
 
     private ListView lvCourses;
 
-    ArrayList<String> coursesList;
+    ArrayList<Course> coursesList;
 
     public EducationFragment() {
         // Required empty public constructor
@@ -37,13 +40,18 @@ public class EducationFragment extends Fragment {
 
         lvCourses = (ListView) v.findViewById(R.id.lv_courses);
 
-        coursesList = new ArrayList<String>();
-        coursesList.add("Nhập môn lập trình");
-        coursesList.add("Cấu trúc dữ liệu và giải thuật");
-        coursesList.add("Lập trình hướng đối tượng");
-        coursesList.add("Cơ sở dữ liệu");
+        coursesList = new ArrayList<Course>();
+        coursesList.add(new Course("Nhập môn lập trình", R.drawable.ic_android_black));
+        coursesList.add(new Course("Cấu trúc dữ liệu và giải thuật", R.drawable.ic_android_green));
+        coursesList.add(new Course("Lập trình hướng đối tượng", R.drawable.ic_android_black));
+        coursesList.add(new Course("Cơ sở dữ liệu", R.drawable.ic_android_green));
+        coursesList.add(new Course("Kiến trúc máy tính", R.drawable.ic_android_black));
+        coursesList.add(new Course("Lý thuyết thông tin", R.drawable.ic_android_green));
+        coursesList.add(new Course("Mạng máy tính", R.drawable.ic_android_black));
+        coursesList.add(new Course("Lập trình ứng dụng trên thiết bị di động", R.drawable.ic_android_green));
+        coursesList.add(new Course("Lập trình hệ thống", R.drawable.ic_android_black));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, coursesList);
+        CoursesAdapter adapter = new CoursesAdapter(getContext(), R.layout.course_item_layout, coursesList);
         lvCourses.setAdapter(adapter);
         return v;
     }

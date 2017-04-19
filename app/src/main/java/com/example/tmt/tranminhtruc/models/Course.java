@@ -4,12 +4,12 @@ package com.example.tmt.tranminhtruc.models;
  * Created by tmtruc on 19/04/2017.
  */
 
-public class Courses {
+public class Course {
 
     private String courseName;
     private int courseImage;
 
-    public Courses(String courseName, int courseImage) {
+    public Course(String courseName, int courseImage) {
         this.courseName = courseName;
         this.courseImage = courseImage;
     }

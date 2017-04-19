@@ -14,9 +14,12 @@ import com.example.tmt.tranminhtruc.fragments.EducationFragment;
 import com.example.tmt.tranminhtruc.fragments.InterestsFragment;
 import com.example.tmt.tranminhtruc.fragments.PersonalInformationFragment;
 import com.example.tmt.tranminhtruc.R;
+import com.example.tmt.tranminhtruc.fragments.QuestionFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new PersonalInformationFragment(), "Thông tin");
         adapter.addFragment(new EducationFragment(), "Học tập");
         adapter.addFragment(new InterestsFragment(), "Sở thích");
+        adapter.addFragment(new QuestionFragment(), "Câu hỏi");
         viewPager.setAdapter(adapter);
     }
-
 }
