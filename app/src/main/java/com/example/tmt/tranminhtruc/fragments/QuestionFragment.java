@@ -1,6 +1,8 @@
 package com.example.tmt.tranminhtruc.fragments;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -87,7 +89,10 @@ public class QuestionFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.custom_dialog_layout);
+                dialog.setTitle("Nhập họ tên");
+                dialog.show();
             }
         });
 
@@ -110,6 +115,8 @@ public class QuestionFragment extends Fragment {
 //                break;
 //        }
 //    }
+
+
 
     class ReadJSON extends AsyncTask<String, Void, String> {
 
@@ -148,7 +155,7 @@ public class QuestionFragment extends Fragment {
             try {
                 if (s != null) {
                     JSONObject jsonRootObject = new JSONObject(s);
-                    JSONArray jsonArray = jsonRootObject.optJSONArray("List_Questions");
+                    JSONArray jsonArray = jsonRootObject.getJSONArray("List_Questions");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         questionArrayList.add(new Question(
@@ -171,6 +178,9 @@ public class QuestionFragment extends Fragment {
         }
     }
 
+
+
+    // Check internet connection
     private boolean checkInternetConnection() {
 
         ConnectivityManager connManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
