@@ -46,7 +46,6 @@ public class EducationFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, coursesList);
         lvCourses.setAdapter(adapter);
         return v;
-
     }
 
 }

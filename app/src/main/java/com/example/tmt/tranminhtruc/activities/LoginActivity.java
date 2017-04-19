@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             public void run() {
                 if (user.equals(userName) && pass.equals(passWord)) {
                     onLoginSuccess();
-                }else {
+                } else {
                     onLoginFailed();
                 }
                 progressDialog.dismiss();
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-         moveTaskToBack(true);
+        moveTaskToBack(true);
     }
 
     private void onLoginFailed() {
