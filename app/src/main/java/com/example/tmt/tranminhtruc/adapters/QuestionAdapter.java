@@ -2,7 +2,6 @@ package com.example.tmt.tranminhtruc.adapters;
 
 import android.content.Context;
 import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,13 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tmt.tranminhtruc.R;
 import com.example.tmt.tranminhtruc.models.Question;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by tmtruc on 19/04/2017.
@@ -56,35 +53,36 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
         final Question question = questionArrayList.get(position);
 
         tvQuestion.setText(question.getQuestion().toString());
-        radOpt1.setText(question.getOpt1().toString());
-        radOpt2.setText(question.getOpt2().toString());
-        radOpt3.setText(question.getOpt3().toString());
-        radOpt4.setText(question.getOpt4().toString());
+        radOpt1.setText(question.getOption1().toString());
+        radOpt2.setText(question.getOption2().toString());
+        radOpt3.setText(question.getOption3().toString());
+        radOpt4.setText(question.getOption4().toString());
 
-       // final int radioId = radioGroup.getCheckedRadioButtonId();
+        // final int radioId = radioGroup.getCheckedRadioButtonId();
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (checkedId) {
                     case R.id.rad_opt1:
-                        question.setAnswer("1");
+                        question.setSelect(1);
                         break;
                     case R.id.rad_opt2:
-                        question.setAnswer("2");
+                        question.setSelect(2);
                         break;
                     case R.id.rad_opt3:
-                        question.setAnswer("3");
+                        question.setSelect(3);
                         break;
                     case R.id.rad_opt4:
-                        question.setAnswer("4");
+                        question.setSelect(4);
                         break;
                     default:
-                        Toast.makeText(getContext(), "Câu " + (position + 1) + " chưa chọn đáp án", Toast.LENGTH_LONG).show();
+                        question.setSelect(0);
                         break;
                 }
             }
         });
 
+        question.setQuestion_ID(position+1);
 
         return view;
     }

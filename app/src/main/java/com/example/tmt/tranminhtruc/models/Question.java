@@ -1,71 +1,86 @@
 package com.example.tmt.tranminhtruc.models;
 
 /**
- * Created by tmtruc on 18/04/2017.
+ * Created by tmtruc on 20/04/2017.
  */
 
 public class Question {
-    String question;
-    String opt1;
-    String opt2;
-    String opt3;
-    String opt4;
-    String answer;
 
-    public Question(String question, String opt1, String opt2, String opt3, String opt4) {
-        this.question = question;
-        this.opt1 = opt1;
-        this.opt2 = opt2;
-        this.opt3 = opt3;
-        this.opt4 = opt4;
+    String Question;
+    String Option1;
+    String Option2;
+    String Option3;
+    String Option4;
+    int Select;
+    int Question_ID;
+
+
+    public Question(String question, String option1, String option2, String option3, String option4) {
+        Question = question;
+        Option1 = option1;
+        Option2 = option2;
+        Option3 = option3;
+        Option4 = option4;
     }
 
+    public Question(int question_ID, int select) {
+        Select = select;
+        Question_ID = question_ID;
+    }
 
     public String getQuestion() {
-        return question;
+        return Question;
     }
 
     public void setQuestion(String question) {
-        this.question = question;
+        Question = question;
     }
 
-    public String getOpt1() {
-        return opt1;
+    public String getOption1() {
+        return Option1;
     }
 
-    public void setOpt1(String opt1) {
-        this.opt1 = opt1;
+    public void setOption1(String option1) {
+        Option1 = option1;
     }
 
-    public String getOpt2() {
-        return opt2;
+    public String getOption2() {
+        return Option2;
     }
 
-    public void setOpt2(String opt2) {
-        this.opt2 = opt2;
+    public void setOption2(String option2) {
+        Option2 = option2;
     }
 
-    public String getOpt3() {
-        return opt3;
+    public String getOption3() {
+        return Option3;
     }
 
-    public void setOpt3(String opt3) {
-        this.opt3 = opt3;
+    public void setOption3(String option3) {
+        Option3 = option3;
     }
 
-    public String getOpt4() {
-        return opt4;
+    public String getOption4() {
+        return Option4;
     }
 
-    public void setOpt4(String opt4) {
-        this.opt4 = opt4;
+    public void setOption4(String option4) {
+        Option4 = option4;
     }
 
-    public String getAnswer() {
-        return answer;
+    public int getSelect() {
+        return Select;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setSelect(int select) {
+        Select = select;
+    }
+
+    public int getQuestion_ID() {
+        return Question_ID;
+    }
+
+    public void setQuestion_ID(int question_ID) {
+        Question_ID = question_ID;
     }
 }

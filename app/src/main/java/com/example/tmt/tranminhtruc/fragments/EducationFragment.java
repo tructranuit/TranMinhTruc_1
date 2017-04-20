@@ -1,18 +1,15 @@
 package com.example.tmt.tranminhtruc.fragments;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.tmt.tranminhtruc.R;
-import com.example.tmt.tranminhtruc.activities.MainActivity;
-import com.example.tmt.tranminhtruc.adapters.CoursesAdapter;
+import com.example.tmt.tranminhtruc.adapters.CourseAdapter;
 import com.example.tmt.tranminhtruc.models.Course;
 
 import java.util.ArrayList;
@@ -51,7 +48,7 @@ public class EducationFragment extends Fragment {
         coursesList.add(new Course("Lập trình ứng dụng trên thiết bị di động", R.drawable.ic_android_green));
         coursesList.add(new Course("Lập trình hệ thống", R.drawable.ic_android_black));
 
-        CoursesAdapter adapter = new CoursesAdapter(getContext(), R.layout.course_item_layout, coursesList);
+        CourseAdapter adapter = new CourseAdapter(getContext(), R.layout.course_item_layout, coursesList);
         lvCourses.setAdapter(adapter);
         return v;
     }

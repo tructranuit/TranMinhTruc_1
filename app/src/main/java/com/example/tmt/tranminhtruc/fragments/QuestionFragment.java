@@ -1,19 +1,19 @@
 package com.example.tmt.tranminhtruc.fragments;
 
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -23,18 +23,15 @@ import android.widget.Toast;
 
 import com.example.tmt.tranminhtruc.R;
 import com.example.tmt.tranminhtruc.adapters.QuestionAdapter;
+import com.example.tmt.tranminhtruc.models.QuestionList;
 import com.example.tmt.tranminhtruc.models.Question;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 /**
@@ -44,12 +41,6 @@ public class QuestionFragment extends Fragment {
 
 
     private Button btnNext;
-    private TextView tvQuestion;
-    private RadioGroup radioGroup;
-    private RadioButton radOpt1;
-    private RadioButton radOpt2;
-    private RadioButton radOpt3;
-    private RadioButton radOpt4;
     private ListView lvQuestion;
     private ProgressBar progressBar;
 
@@ -65,13 +56,6 @@ public class QuestionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_question, container, false);
 
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
-//        tvQuestion = (TextView) view.findViewById(R.id.tv_question);
-//
-//        radioGroup = (RadioGroup) view.findViewById(R.id.radiogroup);
-//        radOpt1 = (RadioButton) view.findViewById(R.id.rad_opt1);
-//        radOpt2 = (RadioButton) view.findViewById(R.id.rad_opt2);
-//        radOpt3 = (RadioButton) view.findViewById(R.id.rad_opt3);
-//        radOpt4 = (RadioButton) view.findViewById(R.id.rad_opt4);
         btnNext = (Button) view.findViewById(R.id.btn_next);
 
         lvQuestion = (ListView) view.findViewById(R.id.lv_question);
@@ -99,24 +83,17 @@ public class QuestionFragment extends Fragment {
         return view;
     }
 
-//    public void checkAnswer() {
-//        int radioID = radioGroup.getCheckedRadioButtonId();
-//        if (radioID == -1) {
-//            Toast.makeText(getContext(), "Chưa chọn câu trả lời", Toast.LENGTH_SHORT).show();
-//        }
-//        switch (radioID) {
-//            case R.id.rad_opt1:
-//                break;
-//            case R.id.rad_opt2:
-//                break;
-//            case R.id.rad_opt3:
-//                break;
-//            case R.id.rad_opt4:
-//                break;
-//        }
-//    }
+    public void setupDialog(Dialog dialog){
+        dialog.setContentView(R.layout.custom_dialog_layout);
+        Button btnOK = (Button) dialog.findViewById(R.id.btn_ok);
+        EditText edtName = (EditText) dialog.findViewById(R.id.edt_name);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
+            }
+        });
+    }
 
     class ReadJSON extends AsyncTask<String, Void, String> {
 
@@ -152,32 +129,32 @@ public class QuestionFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             ArrayList<Question> questionArrayList = new ArrayList<>();
-            try {
-                if (s != null) {
-                    JSONObject jsonRootObject = new JSONObject(s);
-                    JSONArray jsonArray = jsonRootObject.getJSONArray("List_Questions");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        questionArrayList.add(new Question(
-                                jsonObject.getString("Question"),
-                                jsonObject.getString("Option1"),
-                                jsonObject.getString("Option2"),
-                                jsonObject.getString("Option3"),
-                                jsonObject.getString("Option4")
-                        ));
-                    }
-                }
+//            try {
+            if (s != null) {
+//                    JSONObject jsonRootObject = new JSONObject(s);
+//                    JSONArray jsonArray = jsonRootObject.getJSONArray("List_Questions");
+//                    for (int i = 0; i < jsonArray.length(); i++) {
+//                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                        questionArrayList.add(new Question(
+//                                jsonObject.getString("Question"),
+//                                jsonObject.getString("Option1"),
+//                                jsonObject.getString("Option2"),
+//                                jsonObject.getString("Option3"),
+//                                jsonObject.getString("Option4")
+//                        ));
+//                    }
+//                }
 
-                QuestionAdapter adapter = new QuestionAdapter(getContext(), R.layout.question_item_layout, questionArrayList);
+                QuestionList questionList = new Gson().fromJson(s, QuestionList.class);
+                QuestionAdapter adapter = new QuestionAdapter(getContext(), R.layout.question_item_layout, questionList.getList_Questions());
                 lvQuestion.setAdapter(adapter);
                 progressBar.setVisibility(View.GONE);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
             }
         }
     }
-
 
 
     // Check internet connection

@@ -19,12 +19,12 @@ import java.util.ArrayList;
  * Created by tmtruc on 19/04/2017.
  */
 
-public class CoursesAdapter extends ArrayAdapter<Course> {
+public class CourseAdapter extends ArrayAdapter<Course> {
 
     ArrayList<Course> courseList;
     Context context;
 
-    public CoursesAdapter(Context context, int layoutId, ArrayList<Course> arrayList) {
+    public CourseAdapter(Context context, int layoutId, ArrayList<Course> arrayList) {
         super(context, layoutId, arrayList);
         courseList = new ArrayList<>();
         courseList.addAll(arrayList);
