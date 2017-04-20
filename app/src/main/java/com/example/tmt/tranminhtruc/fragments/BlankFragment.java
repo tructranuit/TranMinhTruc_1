@@ -61,13 +61,9 @@ public class BlankFragment extends Fragment {
         ReadJSON readJSON = new ReadJSON();
         readJSON.execute("https://myquestions.herokuapp.com/api/questions");
 
-        if (readJSON.getStatus() == AsyncTask.Status.FINISHED) {
-            Log.d("Size: ", questionArrayList.size() + "");
-        }
-
-
         return view;
     }
+
 
     class ReadJSON extends AsyncTask<String, Void, String> {
 
