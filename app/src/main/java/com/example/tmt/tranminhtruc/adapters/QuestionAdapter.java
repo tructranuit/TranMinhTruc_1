@@ -54,10 +54,10 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
         final Question question = questionArrayList.get(position);
 
         tvQuestion.setText(question.getId() + " - " + question.getQuestion().toString());
-        radOpt1.setText(question.getAnswers().get(0).getId() + " - " + question.getAnswers().get(0).getText());
-        radOpt2.setText(question.getAnswers().get(1).getId() + " - " + question.getAnswers().get(1).getText());
-        radOpt3.setText(question.getAnswers().get(2).getId() + " - " + question.getAnswers().get(2).getText());
-        radOpt4.setText(question.getAnswers().get(3).getId() + " - " + question.getAnswers().get(3).getText());
+        radOpt1.setText(question.getAnswers().get(0).getId() + ") " + question.getAnswers().get(0).getText());
+        radOpt2.setText(question.getAnswers().get(1).getId() + ") " + question.getAnswers().get(1).getText());
+        radOpt3.setText(question.getAnswers().get(2).getId() + ") " + question.getAnswers().get(2).getText());
+        radOpt4.setText(question.getAnswers().get(3).getId() + ") " + question.getAnswers().get(3).getText());
 
         // final int radioId = radioGroup.getCheckedRadioButtonId();
 //        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
