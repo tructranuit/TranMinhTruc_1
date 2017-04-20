@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.tmt.tranminhtruc.adapters.ViewPagerAdapter;
+import com.example.tmt.tranminhtruc.fragments.BlankFragment;
 import com.example.tmt.tranminhtruc.fragments.EducationFragment;
 import com.example.tmt.tranminhtruc.fragments.InterestsFragment;
 import com.example.tmt.tranminhtruc.fragments.PersonalInformationFragment;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new EducationFragment(), "Học tập");
         adapter.addFragment(new InterestsFragment(), "Sở thích");
         adapter.addFragment(new QuestionFragment(), "Câu hỏi");
+        adapter.addFragment(new BlankFragment(), "Test");
         viewPager.setAdapter(adapter);
     }
 }

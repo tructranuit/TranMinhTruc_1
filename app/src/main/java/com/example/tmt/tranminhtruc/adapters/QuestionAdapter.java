@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.tmt.tranminhtruc.R;
 import com.example.tmt.tranminhtruc.models.Question;
+import com.example.tmt.tranminhtruc.models.Result;
 
 import java.util.ArrayList;
 
@@ -52,38 +53,40 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
 
         final Question question = questionArrayList.get(position);
 
-        tvQuestion.setText(question.getQuestion().toString());
-        radOpt1.setText(question.getOption1().toString());
-        radOpt2.setText(question.getOption2().toString());
-        radOpt3.setText(question.getOption3().toString());
-        radOpt4.setText(question.getOption4().toString());
+        tvQuestion.setText(question.getId() + " - " + question.getQuestion().toString());
+        radOpt1.setText(question.getAnswers().get(0).getId() + " - " + question.getAnswers().get(0).getText());
+        radOpt2.setText(question.getAnswers().get(1).getId() + " - " + question.getAnswers().get(1).getText());
+        radOpt3.setText(question.getAnswers().get(2).getId() + " - " + question.getAnswers().get(2).getText());
+        radOpt4.setText(question.getAnswers().get(3).getId() + " - " + question.getAnswers().get(3).getText());
 
         // final int radioId = radioGroup.getCheckedRadioButtonId();
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                switch (checkedId) {
-                    case R.id.rad_opt1:
-                        question.setSelect(1);
-                        break;
-                    case R.id.rad_opt2:
-                        question.setSelect(2);
-                        break;
-                    case R.id.rad_opt3:
-                        question.setSelect(3);
-                        break;
-                    case R.id.rad_opt4:
-                        question.setSelect(4);
-                        break;
-                    default:
-                        question.setSelect(0);
-                        break;
-                }
-            }
-        });
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+//                switch (checkedId) {
+//                    case R.id.rad_opt1:
+//                        question.setSelect(1);
+//                        break;
+//                    case R.id.rad_opt2:
+//                        question.setSelect(2);
+//                        break;
+//                    case R.id.rad_opt3:
+//                        question.setSelect(3);
+//                        break;
+//                    case R.id.rad_opt4:
+//                        question.setSelect(4);
+//                        break;
+//                    default:
+//                        question.setSelect(0);
+//                        break;
+//                }
+//            }
+//        });
 
-        question.setQuestion_ID(position+1);
-
+//        question.setQuestion_ID(position + 1);
+//
+//        ArrayList<Result> results = new ArrayList<>();
+//        results.add(new Result(question.getQuestion_ID(), question.getSelect()));
         return view;
     }
 }

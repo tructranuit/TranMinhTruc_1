@@ -5,4 +5,5 @@
     <color name="colorAccent">#c8e8ff</color>
     <color name="tvBackground">#a5d8fc</color>
     <color name="screenBackground">#fff</color>
+    <color name="tvTextColor">#000</color>
 </resources>
