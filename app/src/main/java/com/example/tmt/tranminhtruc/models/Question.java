@@ -11,6 +11,7 @@ public class Question {
     int id;
     String question;
     ArrayList<Answer> answers;
+    String currentAnswer;
 
     public Question(int id, String question, ArrayList<Answer> answers) {
         this.id = id;
@@ -40,5 +41,13 @@ public class Question {
 
     public void setAnswers(ArrayList<Answer> answers) {
         this.answers = answers;
+    }
+
+    public String getCurrentAnswer() {
+        return currentAnswer;
+    }
+
+    public void setCurrentAnswer(String currentAnswer) {
+        this.currentAnswer = currentAnswer;
     }
 }

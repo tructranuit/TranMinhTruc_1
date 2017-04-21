@@ -56,6 +56,7 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
         final Question question = questionArrayList.get(position);
 
         tvQuestion.setText(question.getId() + " - " + question.getQuestion().toString());
+
         radOpt1.setText(question.getAnswers().get(0).getId() + ") " + question.getAnswers().get(0).getText());
         radOpt2.setText(question.getAnswers().get(1).getId() + ") " + question.getAnswers().get(1).getText());
         radOpt3.setText(question.getAnswers().get(2).getId() + ") " + question.getAnswers().get(2).getText());
@@ -64,47 +65,29 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
         final ArrayList<Result> resultArrayList = new ArrayList<>();
         final int radioId = radioGroup.getCheckedRadioButtonId();
         int questionID = question.getId();
-        String answerID;
+        final String answerID;
 
-        if (radioId == R.id.rad_opt1) {
-            answerID = question.getAnswers().get(0).getId();
-        } else if (radioId == R.id.rad_opt2) {
-            answerID = question.getAnswers().get(1).getId();
-        } else if (radioId == R.id.rad_opt2) {
-            answerID = question.getAnswers().get(2).getId();
-        } else if (radioId == R.id.rad_opt2) {
-            answerID = question.getAnswers().get(3).getId();
-        } else {
-            answerID = "";
-        }
-
-        resultArrayList.add(new Result(questionID, answerID));
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-//                switch (radioId) {
-//                    case R.id.rad_opt1:
-//                        Result result = new Result(question.getId(), question.getAnswers().get(0).getId());
-//                        resultArrayList.add(result);
-//
-//                        break;
-//                    case R.id.rad_opt2:
-//                        result = new Result(question.getId(), question.getAnswers().get(0).getId());
-//                        resultArrayList.add(result);
-//                        break;
-//                    case R.id.rad_opt3:
-//                        result = new Result(question.getId(), question.getAnswers().get(0).getId());
-//                        resultArrayList.add(result);
-//                        break;
-//                    case R.id.rad_opt4:
-//                        result = new Result(question.getId(), question.getAnswers().get(0).getId());
-//                        resultArrayList.add(result);
-//                        break;
-//                    default:
-//                        break;
-//                }
-//            }
-//        });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                switch (radioId) {
+                    case R.id.rad_opt1:
+                        question.setCurrentAnswer(question.getAnswers().get(0).getId());
+                        break;
+                    case R.id.rad_opt2:
+                        question.setCurrentAnswer(question.getAnswers().get(1).getId());
+                        break;
+                    case R.id.rad_opt3:
+                        question.setCurrentAnswer(question.getAnswers().get(2).getId());
+                        break;
+                    case R.id.rad_opt4:
+                        question.setCurrentAnswer(question.getAnswers().get(3).getId());
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
         Log.d("SSS", resultArrayList.size() + "");
 
