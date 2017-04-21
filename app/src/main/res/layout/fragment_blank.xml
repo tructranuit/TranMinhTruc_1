@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="Question"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/tvTextColor"/>
+                android:textColor="@color/tvTextColor" />
 
             <RadioGroup
                 android:id="@+id/radiogroup"
@@ -34,7 +34,8 @@
                     android:id="@+id/rad_opt1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp" />
+                    android:layout_margin="5dp"
+                    android:checked="true" />
 
                 <RadioButton
                     android:id="@+id/rad_opt2"
@@ -58,26 +59,12 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="@string/action_next" />
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_prev"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/action_prev"
-                android:layout_weight="1"/>
-
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_next"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/action_next"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
     </LinearLayout>
 
 

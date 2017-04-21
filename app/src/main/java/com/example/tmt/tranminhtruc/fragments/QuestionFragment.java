@@ -35,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -160,8 +161,6 @@ public class QuestionFragment extends Fragment {
         }
     }
 
-
-    // Check internet connection
     private boolean checkInternetConnection() {
 
         ConnectivityManager connManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -185,5 +184,6 @@ public class QuestionFragment extends Fragment {
         Toast.makeText(getContext(), "Network OK", Toast.LENGTH_SHORT).show();
         return true;
     }
+
 
 }

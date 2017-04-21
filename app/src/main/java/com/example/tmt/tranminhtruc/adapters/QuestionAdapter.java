@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 public class QuestionAdapter extends ArrayAdapter<Question> {
 
+    //https://github.com/RamkailashChoudhary/RadioGroup-In-ListView
     ArrayList<Question> questionArrayList;
     Context context;
 
@@ -59,34 +61,53 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
         radOpt3.setText(question.getAnswers().get(2).getId() + ") " + question.getAnswers().get(2).getText());
         radOpt4.setText(question.getAnswers().get(3).getId() + ") " + question.getAnswers().get(3).getText());
 
-        // final int radioId = radioGroup.getCheckedRadioButtonId();
+        final ArrayList<Result> resultArrayList = new ArrayList<>();
+        final int radioId = radioGroup.getCheckedRadioButtonId();
+        int questionID = question.getId();
+        String answerID;
+
+        if (radioId == R.id.rad_opt1) {
+            answerID = question.getAnswers().get(0).getId();
+        } else if (radioId == R.id.rad_opt2) {
+            answerID = question.getAnswers().get(1).getId();
+        } else if (radioId == R.id.rad_opt2) {
+            answerID = question.getAnswers().get(2).getId();
+        } else if (radioId == R.id.rad_opt2) {
+            answerID = question.getAnswers().get(3).getId();
+        } else {
+            answerID = "";
+        }
+
+        resultArrayList.add(new Result(questionID, answerID));
 //        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 //            @Override
 //            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-//                switch (checkedId) {
+//                switch (radioId) {
 //                    case R.id.rad_opt1:
-//                        question.setSelect(1);
+//                        Result result = new Result(question.getId(), question.getAnswers().get(0).getId());
+//                        resultArrayList.add(result);
+//
 //                        break;
 //                    case R.id.rad_opt2:
-//                        question.setSelect(2);
+//                        result = new Result(question.getId(), question.getAnswers().get(0).getId());
+//                        resultArrayList.add(result);
 //                        break;
 //                    case R.id.rad_opt3:
-//                        question.setSelect(3);
+//                        result = new Result(question.getId(), question.getAnswers().get(0).getId());
+//                        resultArrayList.add(result);
 //                        break;
 //                    case R.id.rad_opt4:
-//                        question.setSelect(4);
+//                        result = new Result(question.getId(), question.getAnswers().get(0).getId());
+//                        resultArrayList.add(result);
 //                        break;
 //                    default:
-//                        question.setSelect(0);
 //                        break;
 //                }
 //            }
 //        });
 
-//        question.setQuestion_ID(position + 1);
-//
-//        ArrayList<Result> results = new ArrayList<>();
-//        results.add(new Result(question.getQuestion_ID(), question.getSelect()));
+        Log.d("SSS", resultArrayList.size() + "");
+
         return view;
     }
 }

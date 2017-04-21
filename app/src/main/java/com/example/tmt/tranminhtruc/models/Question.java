@@ -8,21 +8,21 @@ import java.util.ArrayList;
 
 public class Question {
 
-    String id;
+    int id;
     String question;
     ArrayList<Answer> answers;
 
-    public Question(String id, String question, ArrayList<Answer> answers) {
+    public Question(int id, String question, ArrayList<Answer> answers) {
         this.id = id;
         this.question = question;
         this.answers = answers;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
