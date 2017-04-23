@@ -16,38 +16,33 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tmt.tranminhtruc.R;
 import com.example.tmt.tranminhtruc.adapters.QuestionAdapter;
-import com.example.tmt.tranminhtruc.models.QuestionList;
 import com.example.tmt.tranminhtruc.models.Question;
+import com.example.tmt.tranminhtruc.utils.TaskCompleted;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class QuestionFragment extends Fragment {
+public class QuestionFragment extends Fragment implements TaskCompleted {
 
 
     private Button btnNext;
     private ListView lvQuestion;
     private ProgressBar progressBar;
 
-    private static ArrayList<Question> questionArrayList;
+    private ArrayList<Question> questionArrayList;
 
     public QuestionFragment() {
         // Required empty public constructor
@@ -66,10 +61,8 @@ public class QuestionFragment extends Fragment {
         lvQuestion = (ListView) view.findViewById(R.id.lv_question);
 
         if (checkInternetConnection()) {
-            new ReadJSON().execute("https://myquestions.herokuapp.com/api/questions");
+            new ReadJSON(this).execute("https://myquestions.herokuapp.com/api/questions");
         }
-
-        //Log.d("Size", questionArrayList.size()+"");
 
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +74,6 @@ public class QuestionFragment extends Fragment {
                 dialog.show();
             }
         });
-
 
         return view;
     }
@@ -98,7 +90,19 @@ public class QuestionFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onTaskComplete(ArrayList<Question> questionArrayList) {
+        Log.d("Size: ", questionArrayList.size()+"");
+    }
+
     class ReadJSON extends AsyncTask<String, Void, String> {
+
+        private final TaskCompleted listener;
+
+        public ReadJSON(TaskCompleted listener) {
+            this.listener = listener;
+        }
+
 
         @Override
         protected void onPreExecute() {
@@ -132,36 +136,25 @@ public class QuestionFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
 
-//            try {
             if (s != null) {
-//                    JSONObject jsonRootObject = new JSONObject(s);
-//                    JSONArray jsonArray = jsonRootObject.getJSONArray("List_Questions");
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                        questionArrayList.add(new Question(
-//                                jsonObject.getString("Question"),
-//                                jsonObject.getString("Option1"),
-//                                jsonObject.getString("Option2"),
-//                                jsonObject.getString("Option3"),
-//                                jsonObject.getString("Option4")
-//                        ));
-//                    }
-//                }
-
                 Question[] questionArr = new Gson().fromJson(s, Question[].class);
-                questionArrayList = new ArrayList<Question>(Arrays.asList(questionArr));
+                ArrayList<Question> questionArrayList = new ArrayList<Question>(Arrays.asList(questionArr));
 
-//                questionArrayList = questionList.getList_Questions();
                 QuestionAdapter adapter = new QuestionAdapter(getContext(), R.layout.question_item_layout, questionArrayList);
                 lvQuestion.setAdapter(adapter);
+                if (listener!=null){
+                    listener.onTaskComplete(questionArrayList);
+                }
                 progressBar.setVisibility(View.GONE);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
+            } else {
+                Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private boolean checkInternetConnection() {
+
+        boolean status = true;
 
         ConnectivityManager connManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -169,21 +162,20 @@ public class QuestionFragment extends Fragment {
 
         if (networkInfo == null) {
             Toast.makeText(getContext(), "No default network is currently active", Toast.LENGTH_SHORT).show();
-            return false;
+            status = false;
         }
 
         if (!networkInfo.isConnected()) {
             Toast.makeText(getContext(), "Network is not connected", Toast.LENGTH_SHORT).show();
-            return false;
+            status = false;
         }
 
         if (!networkInfo.isAvailable()) {
             Toast.makeText(getContext(), "Network not available", Toast.LENGTH_SHORT).show();
-            return false;
+            status = false;
         }
-        Toast.makeText(getContext(), "Network OK", Toast.LENGTH_SHORT).show();
-        return true;
-    }
 
+        return status;
+    }
 
 }
