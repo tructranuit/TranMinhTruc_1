@@ -27,7 +27,6 @@ public class InterestsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_interests, container, false);
 
-        String json = "";
         return v;
     }
 

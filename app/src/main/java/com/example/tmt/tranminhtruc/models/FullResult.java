@@ -1,5 +1,6 @@
 package com.example.tmt.tranminhtruc.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,9 +9,9 @@ import java.util.List;
 
 public class FullResult {
     private String name;
-    private List<Result> resultList;
+    private ArrayList<Result> resultList;
 
-    public FullResult(String name, List<Result> resultList) {
+    public FullResult(String name, ArrayList<Result> resultList) {
         this.name = name;
         this.resultList = resultList;
     }
@@ -27,7 +28,7 @@ public class FullResult {
         return resultList;
     }
 
-    public void setResultList(List<Result> resultList) {
+    public void setResultList(ArrayList<Result> resultList) {
         this.resultList = resultList;
     }
 }

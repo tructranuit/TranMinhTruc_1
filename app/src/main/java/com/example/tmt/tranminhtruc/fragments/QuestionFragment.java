@@ -2,9 +2,12 @@ package com.example.tmt.tranminhtruc.fragments;
 
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,7 +23,9 @@ import android.widget.Toast;
 
 import com.example.tmt.tranminhtruc.R;
 import com.example.tmt.tranminhtruc.adapters.QuestionAdapter;
+import com.example.tmt.tranminhtruc.models.FullResult;
 import com.example.tmt.tranminhtruc.models.Question;
+import com.example.tmt.tranminhtruc.models.Result;
 import com.example.tmt.tranminhtruc.utils.TaskCompleted;
 import com.google.gson.Gson;
 
@@ -62,38 +67,58 @@ public class QuestionFragment extends Fragment implements TaskCompleted {
 
         if (checkInternetConnection()) {
             new ReadJSON(this).execute("https://myquestions.herokuapp.com/api/questions");
+            btnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dialog dialog = new Dialog(getContext());
+                    setupDialog(dialog);
+                }
+            });
         }
-
-
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.custom_dialog_layout);
-                dialog.setTitle("Nhập họ tên");
-                dialog.show();
-            }
-        });
 
         return view;
     }
 
-    public void setupDialog(Dialog dialog) {
-        dialog.setContentView(R.layout.custom_dialog_layout);
-        Button btnOK = (Button) dialog.findViewById(R.id.btn_ok);
-        EditText edtName = (EditText) dialog.findViewById(R.id.edt_name);
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }
 
     @Override
     public void onTaskComplete(ArrayList<Question> questionArrayList) {
-        Log.d("Size: ", questionArrayList.size()+"");
+        this.questionArrayList = questionArrayList;
     }
+
+    public void setupDialog(final Dialog dialog) {
+        dialog.setContentView(R.layout.custom_dialog_layout);
+        dialog.setTitle("Nhập họ tên");
+        Button btnOK = (Button) dialog.findViewById(R.id.btn_ok);
+        final EditText edtName = (EditText) dialog.findViewById(R.id.edt_name);
+
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<Result> resultList = new ArrayList<Result>();
+                for (int i = 0; i < questionArrayList.size(); i++) {
+                    int questionID = questionArrayList.get(i).getId();
+                    String answerID = questionArrayList.get(i).getCurrentAnswer();
+                    if (questionArrayList.get(i).getCurrentAnswer() == null) {
+                        answerID = "NONE";
+                    }
+                    resultList.add(new Result(questionID, answerID));
+                }
+                FullResult fullResult = new FullResult(edtName.getText().toString(), resultList);
+                String json = new Gson().toJson(fullResult);
+
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mt.thienthu9x@gmail.com"});
+                intent.putExtra(Intent.EXTRA_CC, new String[]{"mt.thienthu9x@gmail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Answer");
+                intent.putExtra(Intent.EXTRA_TEXT, json);
+                startActivity(Intent.createChooser(intent, "Send mail..."));
+
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
 
     class ReadJSON extends AsyncTask<String, Void, String> {
 
@@ -112,25 +137,7 @@ public class QuestionFragment extends Fragment implements TaskCompleted {
 
         @Override
         protected String doInBackground(String... params) {
-            StringBuilder stringBuilder = new StringBuilder();
-            try {
-                URL url = new URL(params[0]);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setAllowUserInteraction(false);
-                httpURLConnection.setInstanceFollowRedirects(true);
-                httpURLConnection.setRequestMethod("GET");
-                httpURLConnection.connect();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-                bufferedReader.close();
-                httpURLConnection.disconnect();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return stringBuilder.toString();
+            return readJSONFromURL(params[0]);
         }
 
         @Override
@@ -142,7 +149,7 @@ public class QuestionFragment extends Fragment implements TaskCompleted {
 
                 QuestionAdapter adapter = new QuestionAdapter(getContext(), R.layout.question_item_layout, questionArrayList);
                 lvQuestion.setAdapter(adapter);
-                if (listener!=null){
+                if (listener != null) {
                     listener.onTaskComplete(questionArrayList);
                 }
                 progressBar.setVisibility(View.GONE);
@@ -150,6 +157,28 @@ public class QuestionFragment extends Fragment implements TaskCompleted {
                 Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public String readJSONFromURL(String url) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            URL u = new URL(url);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) u.openConnection();
+            httpURLConnection.setAllowUserInteraction(false);
+            httpURLConnection.setInstanceFollowRedirects(true);
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.connect();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            bufferedReader.close();
+            httpURLConnection.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
     }
 
     private boolean checkInternetConnection() {
@@ -165,12 +194,12 @@ public class QuestionFragment extends Fragment implements TaskCompleted {
             status = false;
         }
 
-        if (!networkInfo.isConnected()) {
+        if (networkInfo != null && !networkInfo.isConnected()) {
             Toast.makeText(getContext(), "Network is not connected", Toast.LENGTH_SHORT).show();
             status = false;
         }
 
-        if (!networkInfo.isAvailable()) {
+        if (networkInfo != null && !networkInfo.isAvailable()) {
             Toast.makeText(getContext(), "Network not available", Toast.LENGTH_SHORT).show();
             status = false;
         }

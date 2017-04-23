@@ -11,9 +11,9 @@ public class Question {
     int id;
     String question;
     ArrayList<Answer> answers;
-    String currentAnswer = NONE;
+    String currentAnswer;
     int currentAnswerPositon;
-    public static final String NONE = "none";
+    public static final String NONE = null;
 
     public Question(int id, String question, ArrayList<Answer> answers) {
         this.id = id;

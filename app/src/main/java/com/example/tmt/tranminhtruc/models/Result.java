@@ -6,15 +6,15 @@ package com.example.tmt.tranminhtruc.models;
 
 public class Result {
     private int questionID;
-    private String answer;
+    private String answerID;
 
 
     public Result() {
     }
 
-    public Result(int questionID, String answer) {
+    public Result(int questionID, String answerID) {
         this.questionID = questionID;
-        this.answer = answer;
+        this.answerID = answerID;
     }
 
     public int getQuestionID() {
@@ -25,11 +25,11 @@ public class Result {
         this.questionID = questionID;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getAnswerID() {
+        return answerID;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setAnswerID(String answerID) {
+        this.answerID = answerID;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.tmt.tranminhtruc.activities;
 
 import android.app.ProgressDialog;
-import android.support.annotation.StringDef;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tmt.tranminhtruc.R;
+import com.example.tmt.tranminhtruc.utils.User;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private String userName = "tmtruc";
-    private String passWord = "tmtruc123";
 
     private Button btnLogin;
     private EditText edtUserName;
@@ -30,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = (Button) findViewById(R.id.btn_login);
 
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,9 +35,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
     public void login() {
 
-        if (!validate()) {
+        final String user = edtUserName.getText().toString();
+        final String pass = edtPassWord.getText().toString();
+
+        if (!validate(user, pass)) {
             onLoginFailed();
             return;
         }
@@ -53,13 +57,10 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        final String user = edtUserName.getText().toString();
-        final String pass = edtPassWord.getText().toString();
-
         new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (user.equals(userName) && pass.equals(passWord)) {
+                if (user.equals(User.USERNAME) && pass.equals(User.PASSWORD)) {
                     onLoginSuccess();
                 } else {
                     onLoginFailed();
@@ -70,13 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onLoginSuccess() {
-        btnLogin.setEnabled(true);
         finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
     }
 
     private void onLoginFailed() {
@@ -84,11 +79,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setEnabled(true);
     }
 
-    private boolean validate() {
+    private boolean validate(String user, String pass) {
         boolean valid = true;
-
-        String user = edtUserName.getText().toString();
-        String pass = edtPassWord.getText().toString();
 
         if (user.isEmpty()) {
             edtUserName.setError("Chưa nhập username");
