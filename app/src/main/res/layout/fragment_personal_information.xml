@@ -14,6 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
@@ -27,15 +28,17 @@
                 android:src="@drawable/ic_android_green" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/full_name"
                     android:textAppearance="?android:textAppearanceSmall" />
@@ -44,6 +47,7 @@
                     android:id="@+id/tv_day_of_birth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/day_of_birth"
                     android:textAppearance="?android:textAppearanceSmall" />
@@ -55,10 +59,10 @@
 
         <TextView
             android:id="@+id/textView"
+            style="@style/TextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Địa chỉ:"
-            style="@style/TextViewStyle"/>
+            android:text="Địa chỉ:" />
 
         <TextView
             android:id="@+id/tv_address"
@@ -69,9 +73,9 @@
             android:textAppearance="?android:textAppearanceSmall" />
 
         <TextView
+            style="@style/TextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextViewStyle"
             android:text="Email:" />
 
         <TextView
@@ -83,10 +87,10 @@
             android:textAppearance="?android:textAppearanceSmall" />
 
         <TextView
+            style="@style/TextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Số điện thoại:"
-            style="@style/TextViewStyle" />
+            android:text="Số điện thoại:" />
 
         <TextView
             android:id="@+id/tv_phone_number"
@@ -97,10 +101,10 @@
             android:textAppearance="?android:textAppearanceSmall" />
 
         <TextView
+            style="@style/TextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Website:"
-            style="@style/TextViewStyle" />
+            android:text="Website:" />
 
         <TextView
             android:id="@+id/tv_website"

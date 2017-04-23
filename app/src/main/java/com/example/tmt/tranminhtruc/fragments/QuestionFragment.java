@@ -160,6 +160,7 @@ public class QuestionFragment extends Fragment implements TaskCompleted {
         }
     }
 
+    // Read JSON from url
     public String readJSONFromURL(String url) {
         StringBuilder stringBuilder = new StringBuilder();
         try {
@@ -182,6 +183,8 @@ public class QuestionFragment extends Fragment implements TaskCompleted {
         return stringBuilder.toString();
     }
 
+
+    // Check internet connection
     private boolean checkInternetConnection() {
 
         boolean status = true;
