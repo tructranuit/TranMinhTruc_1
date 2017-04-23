@@ -79,7 +79,6 @@ public class QuestionFragment extends Fragment implements TaskCompleted {
         return view;
     }
 
-
     @Override
     public void onTaskComplete(ArrayList<Question> questionArrayList) {
         this.questionArrayList = questionArrayList;
@@ -103,9 +102,11 @@ public class QuestionFragment extends Fragment implements TaskCompleted {
                     }
                     resultList.add(new Result(questionID, answerID));
                 }
+
                 FullResult fullResult = new FullResult(edtName.getText().toString(), resultList);
                 String json = new Gson().toJson(fullResult);
 
+                // Send email
                 Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mt.thienthu9x@gmail.com"});
                 intent.putExtra(Intent.EXTRA_CC, new String[]{"mt.thienthu9x@gmail.com"});

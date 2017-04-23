@@ -9,5 +9,5 @@ import java.util.ArrayList;
  */
 
 public interface TaskCompleted {
-    public void onTaskComplete(ArrayList<Question> questionArrayList);
+    void onTaskComplete(ArrayList<Question> questionArrayList);
 }
