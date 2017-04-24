@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#125688</color>
     <color name="colorPrimaryDark">#125688</color>
-    <color name="colorAccent">#c8e8ff</color>
+    <color name="colorAccent">#919293</color>
     <color name="tvBackground">#a5d8fc</color>
     <color name="screenBackground">#fff</color>
     <color name="tvTextColor">#000</color>

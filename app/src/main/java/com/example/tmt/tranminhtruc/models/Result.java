@@ -5,31 +5,27 @@ package com.example.tmt.tranminhtruc.models;
  */
 
 public class Result {
-    private int questionID;
-    private String answerID;
+    private int question;
+    private String select;
 
-
-    public Result() {
+    public Result(int question, String select) {
+        this.question = question;
+        this.select = select;
     }
 
-    public Result(int questionID, String answerID) {
-        this.questionID = questionID;
-        this.answerID = answerID;
+    public int getQuestion() {
+        return question;
     }
 
-    public int getQuestionID() {
-        return questionID;
+    public void setQuestion(int question) {
+        this.question = question;
     }
 
-    public void setQuestionID(int questionID) {
-        this.questionID = questionID;
+    public String getSelect() {
+        return select;
     }
 
-    public String getAnswerID() {
-        return answerID;
-    }
-
-    public void setAnswerID(String answerID) {
-        this.answerID = answerID;
+    public void setSelect(String select) {
+        this.select = select;
     }
 }

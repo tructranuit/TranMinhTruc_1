@@ -35,11 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }
-
     public void login() {
 
         final String user = edtUserName.getText().toString();

@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+
+    // setup viewpager
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new PersonalInformationFragment(), "Thông tin cá nhân");

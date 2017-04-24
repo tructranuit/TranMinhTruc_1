@@ -108,12 +108,13 @@ public class QuestionFragment extends Fragment implements TaskCompleted {
 
                 // Send email
                 Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mt.thienthu9x@gmail.com"});
-                intent.putExtra(Intent.EXTRA_CC, new String[]{"mt.thienthu9x@gmail.com"});
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Answer");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"truc.tm94@gmail.com"});
+                intent.putExtra(Intent.EXTRA_CC, new String[]{"truc.tm94@gmail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Result");
                 intent.putExtra(Intent.EXTRA_TEXT, json);
                 startActivity(Intent.createChooser(intent, "Send mail..."));
 
+                Log.d("JSON: ", json);
                 dialog.dismiss();
             }
         });

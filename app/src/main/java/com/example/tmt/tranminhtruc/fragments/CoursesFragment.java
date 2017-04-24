@@ -39,19 +39,19 @@ public class CoursesFragment extends Fragment {
         lvCourses = (ListView) v.findViewById(R.id.lv_courses);
 
         coursesList = new ArrayList<Course>();
-        coursesList.add(new Course("Giải tích", R.drawable.ic_android_black));
-        coursesList.add(new Course("Anh văn", R.drawable.ic_android_green));
-        coursesList.add(new Course("Nhập môn lập trình", R.drawable.ic_android_black));
-        coursesList.add(new Course("Cơ sở dữ liệu", R.drawable.ic_android_green));
-        coursesList.add(new Course("Kiến trúc máy tính", R.drawable.ic_android_black));
-        coursesList.add(new Course("Lý thuyết thông tin", R.drawable.ic_android_green));
-        coursesList.add(new Course("Mạng máy tính", R.drawable.ic_android_black));
-        coursesList.add(new Course("Lập trình ứng dụng trên thiết bị di động", R.drawable.ic_android_green));
-        coursesList.add(new Course("Lập trình hệ thống", R.drawable.ic_android_black));
-        coursesList.add(new Course("Lập trình hướng đối tượng", R.drawable.ic_android_black));
-        coursesList.add(new Course("Cấu trúc dữ liệu và giải thuật", R.drawable.ic_android_green));
-        coursesList.add(new Course("An toàn mạng máy tính", R.drawable.ic_android_black));
-        coursesList.add(new Course("Công nghệ thoại IP", R.drawable.ic_android_green));
+        coursesList.add(new Course("Giải tích", R.drawable.img_default));
+        coursesList.add(new Course("Anh văn", R.drawable.img_default));
+        coursesList.add(new Course("Nhập môn lập trình", R.drawable.img_default));
+        coursesList.add(new Course("Cơ sở dữ liệu", R.drawable.img_default));
+        coursesList.add(new Course("Kiến trúc máy tính", R.drawable.img_default));
+        coursesList.add(new Course("Lý thuyết thông tin", R.drawable.img_default));
+        coursesList.add(new Course("Mạng máy tính", R.drawable.img_default));
+        coursesList.add(new Course("Lập trình ứng dụng trên thiết bị di động", R.drawable.img_default));
+        coursesList.add(new Course("Lập trình hệ thống", R.drawable.img_default));
+        coursesList.add(new Course("Lập trình hướng đối tượng", R.drawable.img_default));
+        coursesList.add(new Course("Cấu trúc dữ liệu và giải thuật", R.drawable.img_default));
+        coursesList.add(new Course("An toàn mạng máy tính", R.drawable.img_default));
+        coursesList.add(new Course("Công nghệ thoại IP", R.drawable.img_default));
 
         CourseAdapter adapter = new CourseAdapter(getContext(), R.layout.course_item_layout, coursesList);
         lvCourses.setAdapter(adapter);

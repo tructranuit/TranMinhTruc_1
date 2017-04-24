@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.tmt.tranminhtruc.R;
+import com.example.tmt.tranminhtruc.activities.MapsActivity;
 
 import org.w3c.dom.Text;
 
@@ -47,8 +48,7 @@ public class PersonalInformationFragment extends Fragment {
         tvAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://www.google.com/maps/place/KTX+Khu+B,+%C4%90HQG/@10.8819859,106.780436,17z/data=!3m1!4b1!4m5!3m4!1s0x3174d89aad780e49:0x54542761d4c22175!8m2!3d10.8819859!4d106.7826247";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                Intent intent = new Intent(getContext(), MapsActivity.class);
                 startActivity(intent);
             }
         });

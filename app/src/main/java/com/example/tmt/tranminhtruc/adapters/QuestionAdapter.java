@@ -57,6 +57,9 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+//        Log.d("getview: ", position + " " + convertView);
+
         View view = convertView;
         ViewHolder viewHolder = null;
 
@@ -65,44 +68,13 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
             view = layoutInflater.inflate(R.layout.question_item_layout, null);
             viewHolder = new ViewHolder(view);
             view.setTag(viewHolder);
-
-            viewHolder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                    int pos = (int) group.getTag();
-                    Question question = questionArrayList.get(pos);
-
-                    switch (checkedId) {
-                        case R.id.rad_opt1:
-                            question.setCurrentAnswer(question.getAnswers().get(0).getId());
-                            question.setCurrentAnswerPositon(0);
-                            break;
-                        case R.id.rad_opt2:
-                            question.setCurrentAnswer(question.getAnswers().get(1).getId());
-                            question.setCurrentAnswerPositon(1);
-                            break;
-                        case R.id.rad_opt3:
-                            question.setCurrentAnswer(question.getAnswers().get(2).getId());
-                            question.setCurrentAnswerPositon(2);
-                            break;
-                        case R.id.rad_opt4:
-                            question.setCurrentAnswer(question.getAnswers().get(3).getId());
-                            question.setCurrentAnswerPositon(3);
-                            break;
-                        default:
-                            question.setCurrentAnswer(Question.NONE);
-                            break;
-                    }
-                }
-            });
-
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
 
         viewHolder.radioGroup.setTag(position);
 
-        Question question = questionArrayList.get(position);
+        final Question question = questionArrayList.get(position);
 
         viewHolder.tvQuestion.setText(question.getId() + " - " + question.getQuestion().toString());
 
@@ -110,6 +82,34 @@ public class QuestionAdapter extends ArrayAdapter<Question> {
         viewHolder.radOpt2.setText(question.getAnswers().get(1).getId() + ") " + question.getAnswers().get(1).getText());
         viewHolder.radOpt3.setText(question.getAnswers().get(2).getId() + ") " + question.getAnswers().get(2).getText());
         viewHolder.radOpt4.setText(question.getAnswers().get(3).getId() + ") " + question.getAnswers().get(3).getText());
+
+        viewHolder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+
+                switch (checkedId) {
+                    case R.id.rad_opt1:
+                        question.setCurrentAnswer(question.getAnswers().get(0).getId());
+                        question.setCurrentAnswerPositon(0);
+                        break;
+                    case R.id.rad_opt2:
+                        question.setCurrentAnswer(question.getAnswers().get(1).getId());
+                        question.setCurrentAnswerPositon(1);
+                        break;
+                    case R.id.rad_opt3:
+                        question.setCurrentAnswer(question.getAnswers().get(2).getId());
+                        question.setCurrentAnswerPositon(2);
+                        break;
+                    case R.id.rad_opt4:
+                        question.setCurrentAnswer(question.getAnswers().get(3).getId());
+                        question.setCurrentAnswerPositon(3);
+                        break;
+                    default:
+                        question.setCurrentAnswer(Question.NONE);
+                        break;
+                }
+            }
+        });
 
         if (question.getCurrentAnswer() != (Question.NONE)) {
             RadioButton radioButton = (RadioButton) viewHolder.radioGroup.getChildAt(question.getCurrentAnswerPositon());
